@@ -1,22 +1,24 @@
-.App {
-  text-align: center;
+.board {
+
+
 }
 
-.App-logo {
-  height: 40vmin;
+.tile {
+  flex: 1;
+  background-color: beige;
+  width: 80px;
+  height: 80px;
+  border: 1px solid #000;  
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.tile--alternate {
+  background-color: #f59f82;
+}
+
+.piece {
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
 }
