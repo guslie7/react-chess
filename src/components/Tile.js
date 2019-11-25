@@ -5,7 +5,8 @@ export default (props) => {
   const classes = classNames({
     tile: true,
     'tile--alternate': props.alternate,
-    'tile-highlighted': props.highlighted
+    'tile--highlighted': props.highlighted,
+    'tile--has-piece': props.hasPiece
   });
 
   return (

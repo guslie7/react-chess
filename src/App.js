@@ -1,23 +1,14 @@
 import React from 'react';
 import './App.css';
 import Board from './components/board/Board';
-import { createBoardPieces } from './components/board/board.service';
-import { useState } from 'react';
+import { createBoardPieces, createBoardTiles } from './components/board/board.service';
 
-const pieces = createBoardPieces('w');
+const pieces = createBoardTiles('w');
 
 function App() {
-  const [piecesSt, updatePiecesSt] = useState(pieces);
   return (
     <div className="App">
-      <Board pieces={piecesSt} ></Board>
-      <button onClick={
-        () => {
-          const novos = piecesSt.slice();
-          novos[0].position = { rowIndex: 0, cellIndex: 1 } ;
-          updatePiecesSt(novos);
-        }
-      }>update</button>
+      <Board tiles={pieces} ></Board>
     </div>
   );
 }

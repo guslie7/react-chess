@@ -1,20 +1,28 @@
 import React from 'react';
 import Tile from '../Tile';
+import { useState } from 'react';
 
-const Board = ({pieces}) => {
+const Board = ({tiles}) => {
+  const [tilesSt, updateTilesFn] = useState(tiles);
+  
   const tileRow = ( rowIndex ) => {
     return [0,1,2,3,4,5,6,7].map((item) => {
-      const found = pieces.find( (piece) => { 
-        return piece.position.rowIndex === rowIndex && piece.position.cellIndex === item;
-      });     
+      const tileFound = tilesSt.find( (tile) => { 
+        return tile.position.rowIndex === rowIndex && tile.position.cellIndex === item;
+      });
       
       return <Tile
-        handleTileClick={function (evt) { console.log(found);
-         } }
-        highlighted={false}
+        handleTileClick={
+          function (evt) {
+            tileFound.highlighted = !tileFound.highlighted;
+            updateTilesFn( tilesSt.slice() );
+          }
+        }
+        hasPiece={ !!tileFound.piece.pieceComponent }
+        highlighted={tileFound.highlighted}
         alternate={ ( rowIndex + item ) % 2 !== 0 }
         key={item+rowIndex}
-        piece={ found ? found.pieceComponent: null }></Tile>
+        piece={ tileFound.piece ? tileFound.piece.pieceComponent: null }></Tile>
     });
   }
 

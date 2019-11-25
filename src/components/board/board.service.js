@@ -1,5 +1,11 @@
-
 import { PieceFactory } from "../pieces/piece.factory";
+export const createBoardTile = ( piece, position ) => {
+  return {
+    piece,
+    position,
+    highlighted: false
+  }
+}
 
 export const createBoardPiece = ( pieceComponent, position ) => {
   return {
@@ -8,7 +14,7 @@ export const createBoardPiece = ( pieceComponent, position ) => {
   }
 }
 
-export const createBoardPieces = ( playerColor ) => {
+export const createBoardTiles = ( playerColor ) => {
   let finalArray = [];
   let truePlayerColor = playerColor;
   
@@ -30,21 +36,21 @@ export const createBoardPieces = ( playerColor ) => {
 
         if ( rowIndex === 0 || rowIndex === 7 ) {
           if ( cellIndex === 0 || cellIndex === 7 ) {
-            rowArray.push( createBoardPiece( PieceFactory('rook', truePlayerColor), position ) );  
+            rowArray.push( createBoardTile( createBoardPiece( PieceFactory('rook', truePlayerColor), position ), position ) );  
           } else if ( cellIndex === 1 || cellIndex === 6 ) {
-            rowArray.push( createBoardPiece( PieceFactory('knight', truePlayerColor), position ) );
+            rowArray.push(  createBoardTile(createBoardPiece( PieceFactory('knight', truePlayerColor), position ), position) );
           } else if ( cellIndex === 2 || cellIndex === 5 ) {
-            rowArray.push( createBoardPiece( PieceFactory('bishop', truePlayerColor), position ) );
+            rowArray.push( createBoardTile(createBoardPiece( PieceFactory('bishop', truePlayerColor), position ), position) );
           } else if ( cellIndex === 3 ) {
-            rowArray.push( createBoardPiece( PieceFactory('queen', truePlayerColor), position ) );
+            rowArray.push( createBoardTile( createBoardPiece( PieceFactory('queen', truePlayerColor), position ), position ));
           } else {
-            rowArray.push( createBoardPiece( PieceFactory('king', truePlayerColor), position ) );
+            rowArray.push( createBoardTile(createBoardPiece( PieceFactory('king', truePlayerColor), position ), position) );
           }
         } else {
-          rowArray.push( createBoardPiece( PieceFactory('pawn', truePlayerColor), position ) );
+          rowArray.push( createBoardTile( createBoardPiece( PieceFactory('pawn', truePlayerColor), position ), position )  );
         }
       } else {        
-        rowArray.push( createBoardPiece( null, position) );
+        rowArray.push(  createBoardTile( createBoardPiece( null, position), position )  );
       }
     }
     finalArray = finalArray.concat(rowArray);
