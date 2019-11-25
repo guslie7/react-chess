@@ -13,9 +13,11 @@ const Board = ({tiles}) => {
       
       return <Tile
         handleTileClick={
-          function (evt) {
-            tileFound.highlighted = !tileFound.highlighted;
-            updateTilesFn( tilesSt.slice() );
+          function (evt) {            
+            if (tileFound.piece.pieceComponent) {
+              tileFound.highlighted = !tileFound.highlighted;
+              updateTilesFn( tilesSt.slice() );
+            }
           }
         }
         hasPiece={ !!tileFound.piece.pieceComponent }

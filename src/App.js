@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Board from './components/board/Board';
-import { createBoardPieces, createBoardTiles } from './components/board/board.service';
+import { createBoardTiles } from './components/board/board.service';
 
 const pieces = createBoardTiles('w');
 
