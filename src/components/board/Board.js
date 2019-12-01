@@ -1,9 +1,12 @@
 import React from 'react';
 import Tile from '../Tile';
 import { useState } from 'react';
+import {handlePieceHighlight, handlePieceMovement} from './movementService';
 
 const Board = ({tiles}) => {
   const [tilesSt, updateTilesFn] = useState(tiles);
+  const [ highlightMode, updateHighlightModeFn ] = useState(false);
+  const [ lastPieceTouched, updateLastPieceTouchedFn ] = useState(null);
   
   const tileRow = ( rowIndex ) => {
     return [0,1,2,3,4,5,6,7].map((item) => {
@@ -13,10 +16,24 @@ const Board = ({tiles}) => {
       
       return <Tile
         handleTileClick={
-          function (evt) {            
-            if (tileFound.piece.pieceComponent) {
+          function (evt) {
+            
+            if (tileFound.piece.pieceComponent && !highlightMode ) {
+              handlePieceHighlight(tileFound.piece, tilesSt);
+              updateLastPieceTouchedFn( tileFound.piece );
               tileFound.highlighted = !tileFound.highlighted;
               updateTilesFn( tilesSt.slice() );
+              updateHighlightModeFn(true);              
+            }
+
+            if (!tileFound.piece.pieceComponent && highlightMode) {
+              handlePieceMovement( lastPieceTouched, tilesSt, tileFound );
+              tilesSt.forEach( (tile) => {
+                tile.highlighted = false;
+              });
+              updateTilesFn( tilesSt.slice() );
+              updateLastPieceTouchedFn( null );
+              updateHighlightModeFn(false);
             }
           }
         }
