@@ -1,7 +1,7 @@
 import React from 'react';
 import Tile from '../Tile';
 import { useState } from 'react';
-import {handlePieceHighlight, handlePieceMovement} from './movementService';
+import {handlePieceHighlight, handlePieceMovement} from '../../services/movements/movement';
 
 const Board = ({tiles}) => {
   const [tilesSt, updateTilesFn] = useState(tiles);

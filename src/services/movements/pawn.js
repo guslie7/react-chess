@@ -1,16 +1,10 @@
-export function handlePieceHighlight( piece, tiles ) {
-  if (piece.type === 'pawn') {
-    return handlePawnHighlight(piece, tiles);
-  }
-}
+import {
+  calculateTargetTilePosition,
+  createEmptyBoardPiece,
+  findTileByPosition
+} from './core';
 
-export function handlePieceMovement( piece, tiles, tileTarget ) {
-  if (piece.type === 'pawn') {
-    return handlePawnMovement(piece, tiles, tileTarget);
-  }
-}
-
-function handlePawnHighlight(piece, tiles) {
+export function handlePawnHighlight(piece, tiles) {
   const targetTilePosition = calculateTargetTilePosition( piece, 1, 0 );  
   const targetTile = findTileByPosition(tiles,
     targetTilePosition.rowIndex,
@@ -30,7 +24,7 @@ function handlePawnHighlight(piece, tiles) {
   return [piece, tiles];
 }
 
-function handlePawnMovement(piece, tiles, tileTarget) {
+export function handlePawnMovement(piece, tiles, tileTarget) {
   const targetTilePosition = calculateTargetTilePosition( piece, 1, 0 );
   const firstValidtargetTile = findTileByPosition(tiles,
     targetTilePosition.rowIndex,
@@ -59,38 +53,5 @@ function handlePawnMovement(piece, tiles, tileTarget) {
       tileTarget.piece = piece;
       return [piece, tiles];
     } 
-  }
-}
-
-function calculateTargetTilePosition( piece, baseSumX, baseSumY ) {
-  const [finalBaseX, finalBaseY] = applyOriginalPositionModifier( piece.originalPosition, baseSumX, baseSumY );
-  return {
-    rowIndex: piece.position.rowIndex + finalBaseX,
-    cellIndex: piece.position.cellIndex + finalBaseY
-  }
-}
-
-function applyOriginalPositionModifier(originalPosition, baseSumX, baseSumY) { 
-  if (originalPosition === 'FROM_BOTTOM') {
-    return [ baseSumX * -1, baseSumY * -1 ];
-  }
-  return [baseSumX, baseSumY];
-}
-
-function findTileByPosition( tiles, rowIndex, cellIndex ) {
-
-  return tiles.find( (tile) => { 
-    return tile.position.rowIndex === rowIndex &&
-      tile.position.cellIndex === cellIndex;
-  });
-
-}
-
-function createEmptyBoardPiece( position ) {
-  return {
-    pieceComponent: null,
-    position,
-    type: '',
-    originalPosition: ''
   }
 }
