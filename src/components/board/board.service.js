@@ -54,7 +54,7 @@ export const createBoardTiles = ( playerColor ) => {
           rowArray.push( createBoardTile( createBoardPiece( PieceFactory('pawn', truePlayerColor), position, 'pawn', originalPosition ), position )  );
         }
       } else {        
-        rowArray.push(  createBoardTile( createBoardPiece( null, position), position )  );
+        rowArray.push(  createBoardTile( createBoardPiece( null, position, '', ''), position )  );
       }
     }
     finalArray = finalArray.concat(rowArray);
