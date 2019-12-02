@@ -1,5 +1,5 @@
 import { handlePawnHighlight, handlePawnMovement, handlePawnAttack } from "./pawn";
-import { handleKnightHighlight, handleKnightMovement, handleKnightAttack } from "./knight";
+import { handleKnightHighlight, handleKnightMovement } from "./knight";
 
 export function handlePieceHighlight( piece, tiles ) {
   if (piece.type === 'pawn') {
@@ -26,6 +26,6 @@ export function handlePieceAttack( piece, tiles, tileTarget ) {
     return handlePawnAttack(piece, tiles, tileTarget);
   }
   if (piece.type === 'knight') {
-    return handleKnightAttack(piece, tiles, tileTarget);
+    return handleKnightMovement(piece, tiles, tileTarget);
   }
 }

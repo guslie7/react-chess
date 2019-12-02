@@ -34,8 +34,8 @@ const Board = ({tiles}) => {
                 tile.highlighted = false;
               });
               updateTilesFn( tilesSt.slice() );
-              updateHighlightModeFn(false);
               updateLastPieceTouchedFn( null );
+              updateHighlightModeFn(false);
             }
 
             if (!tileFound.piece.pieceComponent && highlightMode) {

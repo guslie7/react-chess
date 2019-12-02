@@ -36,22 +36,8 @@ export function handleKnightMovement(piece, tiles, tileTarget) {
       findTileByPosition(tiles, tilePosition.rowIndex, tilePosition.cellIndex) )
     .find((tile) =>  tile === tileTarget);  
   
-  if (matchingTile) {
+  if (matchingTile && matchingTile.piece.originalPosition !== piece.originalPosition) {
     movePieceToTile(piece, tiles, matchingTile);
   }
   return [piece, tiles];
-}
-
-export function handleKnightAttack(piece, tiles, tileTarget) {
-
-  const tilePositions = getTilesPosition(piece);
-  const matchingTile = tilePositions
-    .map( (tilePosition) =>
-      findTileByPosition(tiles, tilePosition.rowIndex, tilePosition.cellIndex) )
-    .find((tile) =>  tile === tileTarget);
-
-  if ( matchingTile && matchingTile.piece.originalPosition !== piece.originalPosition ) {
-    movePieceToTile(piece, tiles, matchingTile);
-  }
-  
 }
