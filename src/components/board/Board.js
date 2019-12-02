@@ -1,7 +1,11 @@
 import React from 'react';
 import Tile from '../Tile';
 import { useState } from 'react';
-import {handlePieceHighlight, handlePieceMovement} from '../../services/movements/movement';
+import {
+  handlePieceHighlight,
+  handlePieceMovement,
+  handlePieceAttack
+} from '../../services/movements/movement';
 
 const Board = ({tiles}) => {
   const [tilesSt, updateTilesFn] = useState(tiles);
@@ -23,7 +27,15 @@ const Board = ({tiles}) => {
               updateLastPieceTouchedFn( tileFound.piece );
               tileFound.highlighted = !tileFound.highlighted;
               updateTilesFn( tilesSt.slice() );
-              updateHighlightModeFn(true);              
+              updateHighlightModeFn(true);
+            } else if ( tileFound.piece.pieceComponent && highlightMode ) {
+              handlePieceAttack( lastPieceTouched, tilesSt, tileFound );
+              tilesSt.forEach( (tile) => {
+                tile.highlighted = false;
+              });
+              updateTilesFn( tilesSt.slice() );
+              updateHighlightModeFn(false);
+              updateLastPieceTouchedFn( null );
             }
 
             if (!tileFound.piece.pieceComponent && highlightMode) {
