@@ -1,6 +1,5 @@
 import {
   calculateTargetTilePosition,
-  createEmptyBoardPiece,
   findTileByPosition,
   movePieceToTile
 } from './core';
@@ -22,7 +21,7 @@ export function handlePawnHighlight(piece, tiles) {
     secondTile.highlighted = true;
   }
 
-  if ( !targetTile.piece.pieceComponent ) {
+  if ( targetTile && !targetTile.piece.pieceComponent ) {
     targetTile.highlighted = true;
   }
 
