@@ -21,14 +21,14 @@ const Board = ({tiles}) => {
       return <Tile
         handleTileClick={
           function (evt) {
-            
+            //piece selected
             if (tileFound.piece.pieceComponent && !highlightMode ) {
               handlePieceHighlight(tileFound.piece, tilesSt);
               updateLastPieceTouchedFn( tileFound.piece );
-              tileFound.highlighted = !tileFound.highlighted;
+              // tileFound.highlighted = !tileFound.highlighted;
               updateTilesFn( tilesSt.slice() );
               updateHighlightModeFn(true);
-            } else if ( tileFound.piece.pieceComponent && highlightMode ) {
+            } else if ( tileFound.piece.pieceComponent && highlightMode ) { // piece attack
               handlePieceAttack( lastPieceTouched, tilesSt, tileFound );
               tilesSt.forEach( (tile) => {
                 tile.highlighted = false;
@@ -38,7 +38,7 @@ const Board = ({tiles}) => {
               updateHighlightModeFn(false);
             }
 
-            if (!tileFound.piece.pieceComponent && highlightMode) {
+            if (!tileFound.piece.pieceComponent && highlightMode) { //piece movement
               handlePieceMovement( lastPieceTouched, tilesSt, tileFound );
               tilesSt.forEach( (tile) => {
                 tile.highlighted = false;
@@ -49,7 +49,8 @@ const Board = ({tiles}) => {
             }
           }
         }
-        hasPiece={ !!tileFound.piece.pieceComponent }
+        tile={tileFound}
+        hasPiece={ tileFound.piece && !!tileFound.piece.pieceComponent }
         highlighted={tileFound.highlighted}
         alternate={ ( rowIndex + item ) % 2 !== 0 }
         key={item+rowIndex}

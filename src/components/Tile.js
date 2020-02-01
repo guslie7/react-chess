@@ -11,6 +11,8 @@ export default (props) => {
 
   return (
     <div onClick={props.handleTileClick} className={classes}>
+      {props.tile.position.rowIndex} -
+      {props.tile.position.cellIndex}
       {props.piece}
     </div>
   );
